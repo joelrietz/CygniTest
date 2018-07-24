@@ -1,12 +1,12 @@
 'use strict';
 
 const mashup = require('./mashUp.js');
-
+const bodyParser = require('body-parser');
 // Setup application
 const express = require('express')
 const app = express()
 
-app.use(bodyparser.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 //Frontend part of application
@@ -22,4 +22,4 @@ app.get('/', (req,res) => {
     res.sendFile(__dirname + '/pubic/index.html');
 })
 
-app.listen(3000, () => console.log("The API is up and running!"))
+app.listen(8081, () => console.log("The API is up and running!"))

@@ -1,10 +1,9 @@
 //Use resource to get and manipulate data
-
-const {wikiResource} = require('./wikiResource');
-const wikiResource = new wikiResource();
+const {WikiResource} = require('./wikiResource');
+const wikiResource = new WikiResource();
 
 //Create the wikiService class to handle functions and data from wikiResource
-exports.wikiService = class {
+exports.WikiService = class {
     constructor(name){
         this.thingy = name;
     }

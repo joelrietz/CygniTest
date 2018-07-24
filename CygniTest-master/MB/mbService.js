@@ -1,12 +1,10 @@
-import { mbResource } from './mbResource';
-
 //Use resource to get and manipulate data in service file
-const {mbService} = require('./mbResource');
-const mbService = new mbService();
-exports.mbService = class {
+const {MbResource} = require('./mbResource.js');
+const mbResrouce = new MbResource();
+exports.MbService = class {
 
     constructor (name){
-        this.thingy.name;
+        this.thingy = name;
     }
 
     async getArtists() {

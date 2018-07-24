@@ -1,10 +1,10 @@
 //Use resource to get and manipulate data
 
-const {caaResource} = require('./caaResource');
-const caaResource = new caaResource();
+const {CaaResource} = require('./caaResource');
+const caaResource = new CaaResource();
 
 //Create the class with functions that gets cover art
-exports.caaService = class {
+exports.CaaService = class {
     constructor(name){
         this.thingy = name;
     }
@@ -14,5 +14,5 @@ exports.caaService = class {
         return coverArt;
     }
 
-    
+
 }

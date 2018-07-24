@@ -1,8 +1,8 @@
 //Require axios to enable simple post and get requests
 const axios = require("axios");
-const wiki_url = ('https://en.wikipedia.org/w/api.php');
+const wiki_url = 'https://en.wikipedia.org/w/api.php';
 
-exports.wikiResource = class {
+exports.WikiResource = class {
 
     constructor(){
 

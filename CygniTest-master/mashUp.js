@@ -1,11 +1,11 @@
-import { wikiService } from './Wiki/wikiService';
-
+const {WikiService} = require('./Wiki/wikiService');
+const wiki = new WikiService();
 //Import and create objects for each service
-const {mbService} = require('./MB/mbService');
-const mb = new mbService();
+const {MbService} = require('./MB/mbService');
+const mb = new MbService();
 
-const {caaService} = require('./CAA/caaService');
-const caa = new caaService();
+const {CaaService} = require('./CAA/caaService');
+const caa = new CaaService();
 
 async function run(message){
     console.log("Running Mashup");
@@ -14,11 +14,11 @@ async function run(message){
 
     const artist = ["Nirvana"];
     //Artist returns a map containing an artist name and corresponding MBID
-    var mbMap = await mbService.getArtists();
+    var mbMap = await MbService.getArtists();
 
-    var caaMap = await caaService.getCoverArt();
+    var caaMap = await CaaService.getCoverArt();
 
-    var wikiMap = await wikiService.getDescription();
+    var wikiMap = await WikiService.getDescription();
 
 }
 

@@ -2,7 +2,7 @@ const axios = require("axios");
 const mb_url = 'https://musicbrainz.org/ws/2/artist?';
 const recordingString = 'inc=recordings';
 
-exports.mbResource = class {
+exports.MbResource = class {
     constructor(name){
         this.thingy = name;
     }
