@@ -1,24 +1,22 @@
-const {WikiService} = require('./Wiki/wikiService');
-const wiki = new WikiService();
 //Import and create objects for each service
-const {MbService} = require('./MB/mbService');
-const mb = new MbService();
-
-const {CaaService} = require('./CAA/caaService');
-const caa = new CaaService();
+const {Service} = require('/Users/jori/git/CygniTest-master/Backend/Service.js');
+const service = new Service();
 
 async function run(message){
-    console.log("Running Mashup");
-    console.log(message);
+   console.log("Running Mashup");
+   console.log(message);
 
+   const artist = ["Nirvana"];
+   //Runs functions imported from Service.js
+   var getArtistName = await Service.getArtistName();
 
-    const artist = ["Nirvana"];
-    //Artist returns a map containing an artist name and corresponding MBID
-    var mbMap = await MbService.getArtists();
+   var getAlbumCover = await Service.getAlbumCover();
 
-    var caaMap = await CaaService.getCoverArt();
+   var getDescription = await Service.getDescription();
 
-    var wikiMap = await WikiService.getDescription();
+   console.log(getArtistName);
+   console.log(getAlbumCover);
+   console.log(getDescription);
 
 }
 
