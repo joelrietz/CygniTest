@@ -1,22 +1,22 @@
 //Use resource to get and manipulate data in service file
-const {Resource} = require('./Resource');
-const resource = new Resource();
-exports.Service = class {
+const Resource = require('./resource');
+const resource = new resource();
+module.exports.service = class {
 
     constructor (name){
         this.thingy = name;
     }
     async getArtistName() {
-        var artistName = await Resource.getMbInfo();
+        var artistName = await resource.getMbInfo();
         return artistName;
         console.log(artistName);
     }
-    async getDescription(){
-        var description = await Resource.getWikiInfo();
+    async getDescription(artistName){
+        var description = await resource.getWikiInfo();
         return description;
     }
-    async getAlbumCover() {
+   /* async getAlbumCover() {
         var albumCover = await Resource.getCoverArtInfo();
         return albumCover;
-    }
+    }*/
 }

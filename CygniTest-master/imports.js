@@ -1,13 +1,16 @@
 // Read name of host in .env file 
 //require('dotenv').config();
-const axios = require('axios');
+module.exports =  {
+axios: require('axios'),
 // Setup application
-const mashup = require('./mashUp.js');
-const bodyParser = require('body-parser');
-const express = require('express');
-const app = express();
-const url = require('url');
-const rp = require('request-promise');
-const cheerio = require('cheerio');
-var fs = require('fs');
-var request = require('request');
+mashup: require('./mashUp.js'),
+bodyParser: require('body-parser'),
+express: require('express'),
+app: express(),
+url: require('url'),
+rp: require('request-promise'),
+cheerio: require('cheerio'),
+fs: require('fs'),
+request: require('request')
+}
+

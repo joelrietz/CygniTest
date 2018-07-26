@@ -1,18 +1,5 @@
 'use strict';
-var packages = require('/Users/jori/git/CygniTest-master/imports.js');
-// Read name of host in .env file 
-//require('dotenv').config();
-const axios = require('axios');
-// Setup application
-const mashup = require('./mashUp.js');
-const bodyParser = require('body-parser');
-const express = require('express');
-const app = express();
-const url = require('url');
-const rp = require('request-promise');
-const cheerio = require('cheerio');
-var fs = require('fs');
-var request = require('request');
+var packages = require('./imports.js');
 
 //var mbURL = 'http://musicbrainz.org/ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?&fmt =json&inc=url-rels+release-groups';
 
