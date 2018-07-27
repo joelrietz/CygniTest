@@ -1,6 +1,6 @@
 //Import and create objects for each service
-const Service = require('/Users/jori/git/CygniTest-master/Backend/Service.js');
-const service = new service();
+var Service = require('./Backend/Service.js');
+var service = new Service();
 
 async function run(message){
    console.log("Running Mashup");
@@ -8,12 +8,14 @@ async function run(message){
 
    const artist = ["Nirvana"];
    //Runs functions imported from Service.js
-   var getArtistName = await service.getArtistName();
+   var getUserInput = await service.getUserInput();
+
+   var getArtistName = await service.getArtistName(MBID);
 
    var getAlbumCover = await service.getAlbumCover(artistName);
 
-   //var getDescription = await Service.getDescription();
-
+   //var getDescription = await service.getDescription();
+   console.log(getUserInput)
    console.log(getArtistName);
    console.log(getAlbumCover);
    console.log(getDescription);

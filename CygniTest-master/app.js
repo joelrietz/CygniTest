@@ -1,6 +1,8 @@
 'use strict';
-var packages = require('./imports.js');
-
+const bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
+const mashup = require('./mashUp.js');
 //var mbURL = 'http://musicbrainz.org/ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?&fmt =json&inc=url-rels+release-groups';
 
 app.use(bodyParser.json());

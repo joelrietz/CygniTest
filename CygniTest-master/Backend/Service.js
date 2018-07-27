@@ -1,18 +1,24 @@
 //Use resource to get and manipulate data in service file
-const Resource = require('./resource');
-const resource = new resource();
-module.exports.service = class {
-
+var Resource = require('/Users/jori/git/CygniTest-master/Backend/Resource.js');
+var resource = new Resource();
+module.exports.Service = class {
     constructor (name){
         this.thingy = name;
     }
-    async getArtistName() {
-        var artistName = await resource.getMbInfo();
+    async getUserInput() {
+        var userInput = await resource.getMBID();
+        return MBID;
+        console.log(MBID);
+    }
+
+    async getArtistName(MBID) {
+        var artistName = await resource.getMbInfo(MBID);
         return artistName;
         console.log(artistName);
     }
     async getDescription(artistName){
-        var description = await resource.getWikiInfo();
+        var description = await resource.getWikiInfo(artistName);
+        console.log(description);
         return description;
     }
    /* async getAlbumCover() {
