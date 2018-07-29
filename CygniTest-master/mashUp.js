@@ -5,20 +5,23 @@ var service = new Service();
 async function run(message){
    console.log("Running Mashup");
    console.log(message);
-
-   const artist = ["Nirvana"];
    //Runs functions imported from Service.js
-   var getUserInput = await service.getUserInput();
+   try {
+    //var getMBID = await service.getUserInput(message);
 
-   var getArtistName = await service.getArtistName(MBID);
-
-   var getAlbumCover = await service.getAlbumCover(artistName);
-
-   //var getDescription = await service.getDescription();
-   console.log(getUserInput)
-   console.log(getArtistName);
-   console.log(getAlbumCover);
-   console.log(getDescription);
+    var getArtistName = await service.getArtistName();
+ 
+    //var getAlbumCover = await service.getAlbumCover(getArtistName);
+ 
+    //var getDescription = await service.getDescription();
+   } catch (error) {
+       console.log("Error " + error);
+   }
+   
+   //console.log(getMBID);
+   //console.log(getArtistName);
+   //console.log(getAlbumCover);
+   //console.log(getDescription);
 
 }
 

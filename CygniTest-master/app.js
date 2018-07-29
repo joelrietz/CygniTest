@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const mashup = require('./mashUp.js');
+const axios = require('axios');
+const url = require('url');
 //var mbURL = 'http://musicbrainz.org/ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?&fmt =json&inc=url-rels+release-groups';
 
 app.use(bodyParser.json());
@@ -13,11 +15,12 @@ app.use(express.static(__dirname + '/public'));
 
 app.post('/run', (req, res) => {
     mashup.run(req.body.message);
+    console.log(req.body.message);
     res.send("Whoop whoop!");
 
 });
-//This functions are only here temporarily due to some structural problems, will be removed and only present in Resources
-/*    axios.get('http://musicbrainz.org/ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?&fmt=json&inc=url-rels+release-groups').then(function(response) {
+//These functions are only here temporarily due to some structural problems, will be removed and only present in Resources
+ /*   axios.get('http://musicbrainz.org/ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?&fmt=json&inc=url-rels+release-groups').then(function(response) {
     var mbJson = response.data.relations;
     var arr = [];
     var mbArr;
@@ -54,5 +57,4 @@ app.post('/run', (req, res) => {
 app.get('/', (req,res) => {
     res.sendFile(__dirname + '/public/index.html');
 })
-
 app.listen(8082, () => console.log("The API is up and running!"))
