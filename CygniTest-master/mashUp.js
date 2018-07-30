@@ -10,12 +10,18 @@ async function run(message){
     //var getMBID = await service.getUserInput(message);
 
     var getArtistName = await service.getArtistName();
+    console.log("getArtistName: " + getArtistName);
  
-    //var getAlbumCover = await service.getAlbumCover(getArtistName);
- 
-    //var getDescription = await service.getDescription();
+    var getAlbumCover = await service.getAlbumInfo();
+    console.log("getAlbumCover: " + getAlbumCover);
+
+    var getImage = await service.getCoverArt()
+    console.log("getImage: "+ getImage);
+    
+    var getDescription = await service.getDescription();
+    console.log("getDescription: " + getDescription);
    } catch (error) {
-       console.log("Error " + error);
+       console.log("Error in Mashup " + error);
    }
    
    //console.log(getMBID);
