@@ -6,7 +6,8 @@ const url = require('url');
 const mashup = require('/Users/jori/git/CygniTest-master/mashUp.js');
 const express = require('express');
 const app = express();
-var fs = require("fs");
+var bandName = null;
+const cb = require('callback')
 
 
 
@@ -34,52 +35,50 @@ module.exports = class {
         console.log(mbid);
         return mbid; 
     }*/
-
-    async getMbInfo(){
-        const mbUrl = "http://musicbrainz.org/ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?&fmt=json&inc=url-rels+release-groups";
-        try {
-            await axios.get(mbUrl).then(function(response) {
-                var mbJson = response.data.relations;
-                var arr = [];
-            for (var id in mbJson){
-                arr = mbJson[id]["url"]["resource"];
-                if(arr.includes('https://en.wikipedia.org/wiki/')){
-                    var bandName = url.parse(arr).path.split("/")[2];          
-                }
+/*async getMbInfo(){
+    const mbUrl = "http://musicbrainz.org/ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?&fmt=json&inc=url-rels+release-groups";
+    try {
+        await axios.get(mbUrl).then(function(response) {
+            let mbJson = response.data.relations;
+            let arr = [];
+        for (var id in mbJson){
+            arr = mbJson[id]["url"]["resource"];
+            if(arr.includes('https://en.wikipedia.org/wiki/')){
+                var bandName = url.parse(arr).path.split("/")[2];          
             }
-            console.log(bandName);
-            return bandName;
+        }
+        console.log("BAND NAME: " + bandName);
+            
         })
     }
     catch (error) {
         console.log("Error getMBInfo " + error);
     }
+    return bandName;
     }
-   
+
+async getWikiInfo(bandName){
+        try{
+            console.log(bandName);
+            const bandName ="Nirvana_(band)";
+            const wikiUrl = 'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=true&redirects=true&titles=' + bandName;
+            await axios.get(wikiUrl).then(function(response){
+                const wikiJson = response.data.query;
+                const wikiArr = [];
+                for(var id in wikiJson){
+                wikiArr[id] = wikiJson["pages"];
+                }
+            console.log(wikiArr);
+            })
+        //TO DO, THIS IS WHERE I AM STUCK AT THE MOMENT
+        //console.log(bandName);
+        }
+        catch (error) {
+            console.log("Error getMbInfo " + error);
+        }
+}
     
 //Function for getting the artist description from wikipedia
-    async getWikiInfo(){
-    try{
-        var bandName ="Nirvana_(band)";
-        var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=true&redirects=true&titles=' + bandName;
-        await axios.get(wikiUrl).then(function(response){
-            var wikiJson = response.data.query;
-            var content = fs.readFileSync(wikiJson);
-            var jsonContent = JSON.parse(content);
-            var wikiArr = [];
-            for(var id in wikiJson){
-            wikiArr[id] = wikiJson["pages"];
-            }
-        console.log(jsonContent);
-        })
-    //TO DO, THIS IS WHERE I AM STUCK AT THE MOMENT
-    //console.log(bandName);
-    }
-    catch (error) {
-        console.log("Error getMbInfo " + error);
-    }
-    
-    }
 async albumInfo(){
     try {
         var mbUrl = "http://musicbrainz.org/ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?&fmt=json&inc=url-rels+release-groups";
@@ -124,4 +123,4 @@ async getAlbumImage(){
         console.log("Error getAlbumImage " + error);   
         }
     }    
-}
+*/}

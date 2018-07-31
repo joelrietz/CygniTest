@@ -20,22 +20,22 @@ module.exports = class {
 
     async getArtistName() {
         var artistName = await resource.getMbInfo();
-        console.log("getArtistName " + artistName);
+        //console.log("getArtistName " + artistName);
         return artistName;
     }
     async getDescription(bandName){
         var description = await resource.getWikiInfo();
-        console.log("getDescription " +description);
+        //console.log("getDescription " +description);
         return description;
     }
-   async getAlbumInfo() {
+   async getAlbumCover() {
         var albumInfo = await resource.albumInfo();
-        console.log("getAlbumInfo " +albumInfo);
+        //console.log("getAlbumInfo " +albumInfo);
         return albumInfo;
     }
     async getCoverArt() {
         var coverArt = await resource.getAlbumImage();
-        console.log("getCoverArt " +coverArt);
+        //console.log("getCoverArt " +coverArt)
         return coverArt;
     } 
     
