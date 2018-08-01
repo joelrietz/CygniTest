@@ -9,7 +9,13 @@ var getArtistName = null;
 const url = require('url');
 var stringify = require('json-stable-stringify');
 var fs = require('file-system');
-var callback = require('callback')
+var callback = require('callback');
+const express = require('express');
+const fetch = require('fetch');
+const mash = express();
+var toString = require('to-string');
+var qs = require('qs');
+
 async function run(message){
    console.log("Running Mashup");
    console.log(message);
@@ -29,7 +35,7 @@ async function run(message){
 
     const getCoverArt = await service.getCoverArt()
     console.log("getImage: "+ getCoverArt);*/
-        var mbUrl = "http://musicbrainz.org/ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?&fmt=json&inc=url-rels+release-groups";
+        var mbUrl = "http://musicbrainz.org/ws/2/artist/"+message+"?&fmt=json&inc=url-rels+release-groups";
 
             await axios.get(mbUrl).then(function(response) {
                 let mbJson = response.data.relations;
@@ -48,10 +54,10 @@ async function run(message){
             console.log("BAND NAME: " + bandName);
             const wikiUrl = 'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=true&redirects=true&titles=' + bandName;
             axios.get(wikiUrl).then(function(response){
-                const wikiJson = response.data.query;
-                const wikiArr = [];
+                var wikiJson = response.data.query;
+                var wikiArr = [];
                 for(var id in wikiJson){
-                    wikiArr[id] = wikiJson[id];
+                    wikiArr[id] = wikiJson[id]["pages"];
                 }
                 console.log("Description: " + wikiArr);
                 })
@@ -74,29 +80,59 @@ async function run(message){
                     titleArr[id] = albumJson[id]["title"];
                     idArr[id] = albumJson[id]["id"];
                 }
-                console.log("ALBUMJSON: " + titleArr[0]);
+    
+                console.log("ALBUMJSON: " +titleArr);
                 //console.log(idArr);
-                console.log("idArr: " + mbUrl);
+                console.log("idArr: " + idArr);
                 var caaUrl = [];
+                var caaUrlString = "";
+                //var caaUrl = "http://coverartarchive.org/release-group/1b022e01-4da6-387b-8658-8678046e4cef"
                 for(var id in idArr){
-                    caaUrl = "http://coverartarchive.org/release-group/" + idArr[id];
-                }
-                console.log("CAAURL" + caaUrl[1]);
+                    caaUrl[id] = "http://coverartarchive.org/release-group/" + idArr[id];
+                    caaUrlString = toString(caaUrl[id]);
+                    console.log("CAAAURLSTRING: " +caaUrlString);
                 
-                axios.get(caaUrl).then(function(response){
-                var imageJson = response.data.images;
+                
+                /*var caaJson = JSON.stringify(caaUrl);
+                console.log("CAAAAAJSON: " +caaJson);
+                var parseCaaJson = JSON.parse(caaJson);
+                console.log("PARSED CAAJSON: "+parseCaaJson);
+                fs.writeFile('mycaajson', json, 'utf8', callback);
+                caaUrlString = toString(caaUrl[id]);
+                caaUrlString = caaUrl[0];
+                console.log("HRHIRHUROHJSTING: " + caaUrlString);
+                JSON.stringify(caaUrl);
+                console.log("CAAAREHIEUHRIUODSHRUIAHR " + caaUrl);*/
                 var imageArr = [];
-                for(var id in imageJson){
-                    imageArr[id] = imageJson[id]["image"];
-                }
+            
+                axios.get(caaUrlString).then(function(response){
+                    var imageJson = response.data["images"];
+                    console.log("IMAGEJSON: " +imageJson);
+                    for(var id in imageJson){
+                        imageArr[id] = imageJson[id]["image"];
+                        
+                    }
+                    console.log("IMAGEARR: " + imageArr[id]);
+                })
+            }
+                    
+                
+               
+                /*let promiseArr = caaUrl.map(l => fetch(l).then(res => res.json()));
+                Promise.all(promiseArr).then(res => {
+                    var imageJson = res;
+                    console.log(imageJson);
+                })*/
                 var albumArr = [];
                 for(var id in idArr){
-                    albumArr[id] = titleArr[id]+idArr[id]+imageArr[id];
+                    albumArr[id] = "title: " + titleArr[id] + "id: "+idArr[id] + "image: "+imageArr[id];
                 }
                 var json = JSON.stringify(albumArr);
+                console.log(json);
                 fs.writeFile('myjsonfile', json, 'utf8', callback);
-                console.log("ALBUMARR " + albumArr[0]);
-            })
+                
+                console.log("ALBUMARR " + albumArr);
+            
         });
 
         
