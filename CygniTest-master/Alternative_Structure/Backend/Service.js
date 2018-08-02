@@ -1,22 +1,17 @@
 //Use resource to get and manipulate data in service file
 var Resource = require('/Users/jori/git/CygniTest-master/Backend/Resource.js');
 var resource = new Resource();
-//var Mashup = require('/Users/jori/git/CygniTest-master/mashUp.js');
-//var mashup = new mashup();
+var Mashup = require('/Users/jori/git/CygniTest-master/mashUp.js');
+var mashup = new mashup();
 module.exports = class {
     constructor(name){
         this.thingy = name;
     }
-    /*async getUserInput(message) {
-        var MBID = await resource.getMBID(message);
-        return MBID;
-        console.log(MBID);
-    }*/
 
-    /*async getMessage() {
+    async getMessage() {
         var mbid = await mashup.run(message);
         return message;
-        }*/
+        }
 
     async getArtistName() {
         var artistName = await resource.getMbInfo();

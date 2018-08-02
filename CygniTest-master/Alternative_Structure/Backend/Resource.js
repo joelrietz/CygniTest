@@ -17,25 +17,14 @@ module.exports = class {
     constructor (name){
         this.name = name;
     }
-    /*async getMBID(message){
-        var MBID;
-        await prompt.start(message);
-        prompt.get(['MBID']), function(err, result) {
-            console.log("MBID input received");
-            console.log(result.MBID);
-            var MBID = result.MBID;
-            return MBID;
-        }
-    
-    }*/
-//Function for getting the list of artists
+//Function for getting the mbid from the server input
+async getMBID() {
+            var mbid = service.getMessage();
+            console.log(mbid);
+            return mbid; 
+    }
 
-    /*async getMBID() {
-        var mbid = service.getMessage();
-        console.log(mbid);
-        return mbid; 
-    }*/
-/*async getMbInfo(){
+async getMbInfo(){
     const mbUrl = "http://musicbrainz.org/ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?&fmt=json&inc=url-rels+release-groups";
     try {
         await axios.get(mbUrl).then(function(response) {
@@ -48,15 +37,16 @@ module.exports = class {
             }
         }
         console.log("BAND NAME: " + bandName);
-            
+        return bandName;    
         })
     }
     catch (error) {
         console.log("Error getMBInfo " + error);
     }
-    return bandName;
+    
     }
 
+//Function for getting the artist description from wikipedia
 async getWikiInfo(bandName){
         try{
             console.log(bandName);
@@ -69,16 +59,15 @@ async getWikiInfo(bandName){
                 wikiArr[id] = wikiJson["pages"];
                 }
             console.log(wikiArr);
+            return wikiArr;
             })
-        //TO DO, THIS IS WHERE I AM STUCK AT THE MOMENT
-        //console.log(bandName);
         }
         catch (error) {
             console.log("Error getMbInfo " + error);
         }
 }
     
-//Function for getting the artist description from wikipedia
+//Function for getting the the album info from MusicBrainz
 async albumInfo(){
     try {
         var mbUrl = "http://musicbrainz.org/ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?&fmt=json&inc=url-rels+release-groups";
@@ -98,15 +87,13 @@ async albumInfo(){
     catch (error) {
         console.log("Error albumInfo " + error);
     }
-    }
+}
+
 async getAlbumImage(){
     try{
         var caaUrl = "http://coverartarchive.org/release-group/1b022e01-4da6-387b-8658-8678046e4cef";
-        
         await axios.get(caaUrl).then(function(response){
-            
             var imageJson = response.data.images;
-            
             var imageArr = [];
            
             for(var id in imageJson){
@@ -114,8 +101,6 @@ async getAlbumImage(){
             }
             console.log(imageArr);
             return imageArr;
-           
-            
         })
         
     }
@@ -123,4 +108,4 @@ async getAlbumImage(){
         console.log("Error getAlbumImage " + error);   
         }
     }    
-*/}
+}
