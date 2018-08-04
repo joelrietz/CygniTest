@@ -5,7 +5,7 @@ This purpose of this project is to build a REST API that offers av mashup three 
 
 # Installation
 Download the latest version of nodejs using this link: https://nodejs.org/en/, npm will be installed automatically with that download. 
-Clone into the git repository by using the command: $ git clone git@github.com:joelrietz/CygniTest.git
+Clone into the git repository by using the command: $ git clone git@github.com:joelrietz/CygniTest.git.
 Install the following packes using $ npm install:   
     "axios"
     "body-parser"
@@ -40,4 +40,4 @@ npm & express
 Joel Rietz
 
 # Acknowledgements
-To Cygni for providing this assignment as it has made me become a better nodejs programmer.
+To Cygni for providing this assignment as it has made me become a better nodejs programmer
